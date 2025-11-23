@@ -1,1 +1,4 @@
 flask==2.3.2
+python-dotenv
+openai
+azure-ai-inference

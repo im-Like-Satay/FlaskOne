@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hitung Usia</title>
-</head>
-    <body>
-        <h1>{{title}}</h1>
-        <form method="post" action="/usia">
-            <label>Masukann Tahun Lahir</label>
-            <input type="number" name="tahun_lahir"/>
-            <button type="submit">Submit</button>
-        </form>
-        <p>{{usia}}</p>
-        <ul>
-            <li>
-                <a href="/">Kembali ke home</a>
-                <a href="/about">Ke about</a>
-            </li>
-        </ul>
-    </body>
+  </head>
+  <body>
+    <h1>{{title}}</h1>
+    <form method="post" action="/usia">
+      <label>Masukann Tahun Lahir</label>
+      <input type="number" name="tahun_lahir" />
+      <button type="submit">Submit</button>
+    </form>
+    <p>{{usia}}</p>
+    <p>{{fakta}}</p>
+    <ul>
+      <li>
+        <a href="/">Kembali ke home</a>
+        <a href="/about">Ke about</a>
+      </li>
+    </ul>
+  </body>
 </html>
