@@ -1,14 +1,15 @@
 # Fix untuk Python 3.14 compatibility
-import pkgutil
-import importlib.util
-if not hasattr(pkgutil, 'get_loader'):
-    def get_loader(name):
-        try:
-            spec = importlib.util.find_spec(name)
-            return spec.loader if spec else None
-        except:
-            return None
-    pkgutil.get_loader = get_loader
+# for devlopment environment only
+# import pkgutil
+# import importlib.util
+# if not hasattr(pkgutil, 'get_loader'):
+#     def get_loader(name):
+#         try:
+#             spec = importlib.util.find_spec(name)
+#             return spec.loader if spec else None
+#         except:
+#             return None
+#     pkgutil.get_loader = get_loader
 # <<< import library yang dibutuhkan >>>
 from flask import Flask, render_template, request
 import os
