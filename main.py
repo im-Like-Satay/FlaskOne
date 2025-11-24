@@ -14,34 +14,34 @@ from flask import Flask, render_template, request
 import os
 from dotenv import load_dotenv
 from datetime import datetime
-# from openai import OpenAI
-from azure.ai.inference import ChatCompletionsClient
-from azure.ai.inference.models import SystemMessage
-from azure.ai.inference.models import UserMessage
-from azure.core.credentials import AzureKeyCredential
+from openai import OpenAI
 
 load_dotenv()
 
 app = Flask(__name__)
 
-def ai_call(UserInput_tahun_lahir):
+def ai_call(tahun):
     try:
-        client = ChatCompletionsClient(
-            endpoint="https://models.github.ai/inference",
-            credential=AzureKeyCredential(os.environ["DEEPSEEK_API_KEY"]),
+        client = OpenAI(
+            base_url="https://openrouter.ai/api/v1",
+            api_key=os.environ.get("DEEPSEEK_API_KEY"),
         )
 
-        response = client.complete(
+        completion = client.chat.completions.create(
+            model="google/gemma-3n-e2b-it:free",
             messages=[
-                UserMessage(f"berikan satu fakta menarik tentang teknologi berdasarkan tahun lahir{UserInput_tahun_lahirtahun_lahir}"),
+                {
+                    "role": "user",
+                    "content": f"PERLU diingat Kamu adalah asisten yang memberikan fakta menarik tentang teknologi berdasarkan tahun lahir yang diberikan oleh user, PERLU diingat tidak perlu menggunakan hal seperti ini maupun yang sejenisnya 'Baik, berdasarkan tahun lahir <<<tahun lahir>>> langsung berikan fakta kepada user, CONTOH: 'pada tahun <<<tahun lahir>>> ada bla bla bla' atau semacam contoh tersebut jadi langsung pada intinya . berikut satu fakta menarik tentang teknologi': . berikan satu fakta singkat tentang teknologi berdasarkan tahun lahir {tahun}"
+                }
             ],
-            model="deepseek/DeepSeek-R1",
-            max_tokens=2048,
         )
 
-        return response.choices[0].message.content
+        fakta = completion.choices[0].message.content
+        return fakta
     except Exception as e:
-        return f"<h1 style='font-family: Arial;'>terjadi kesalahan saat memanggil API Deepseek R1 :</h1><p>{e}</p>"
+        return f"terjadi kesalahan saat memanggil API Deepseek : {e}"
+
 
 @app.route("/")
 def main():
@@ -62,7 +62,7 @@ def cal_usia():
         tahun_sekarang = datetime.now().year
         usia = f"usia anda saat ini adalah : {tahun_sekarang - tahun_lahir} tahun"
         
-        fakta = ai_call(str(tahun_lahir))
+        fakta = ai_call(tahun_lahir)
 
         return render_template("usia.html", title=title, usia=usia, fakta=fakta)
     return render_template("usia.html", title=title)
