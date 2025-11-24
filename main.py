@@ -67,5 +67,6 @@ def cal_usia():
         return render_template("usia.html", title=title, usia=usia, fakta=fakta)
     return render_template("usia.html", title=title)
 
-if __name__ == "__main__":
-    app.run("0.0.0.0", debug=True)
+# Don't run this code in production.
+# if __name__ == "__main__":
+#     app.run("0.0.0.0", debug=True)
