@@ -3,14 +3,161 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <title>AgeFact App - Beranda</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Konfigurasi Tailwind untuk Font Inter dan palet warna elegan -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              primary: "#4F46E5", // Indigo-600 (Warna Utama yang Elegan)
+              secondary: "#F43F5E", // Rose-500 (Aksen Kontras)
+              background: "#F8FAFC", // Slate-50 (Latar Belakang Bersih)
+              card: "#FFFFFF", // Putih untuk Card
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Font Inter dari Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <h1>{{title}}</h1>
-    <br />
-    <ul>
-      <li><a href="/usia">Cek Usia Anda</a></li>
-      <li><a href="/about">Ke about</a></li>
-    </ul>
+  <body class="font-sans bg-background min-h-screen flex flex-col antialiased">
+    <!-- Navbar -->
+    <nav class="bg-card shadow-lg sticky top-0 z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <a
+            href="/"
+            class="text-2xl font-extrabold text-primary tracking-tight"
+          >
+            AgeFact.
+          </a>
+          <div class="flex items-center space-x-4">
+            <!-- Navigasi Utama -->
+            <div class="hidden md:flex items-center space-x-2">
+              <a
+                href="/usia"
+                class="text-gray-600 hover:text-primary px-3 py-2 rounded-lg text-base font-medium transition duration-150"
+              >
+                Cek Usia & Fakta
+              </a>
+              <a
+                href="/about"
+                class="text-gray-600 hover:text-primary px-3 py-2 rounded-lg text-base font-medium transition duration-150"
+              >
+                Tentang
+              </a>
+            </div>
+            <!-- Link GitHub (Dipercantik) -->
+            <a
+              href="https://github.com/im-Like-Satay"
+              target="_blank"
+              class="bg-primary hover:bg-indigo-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition duration-300 flex items-center shadow-lg shadow-primary/30"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="mr-2"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2c0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                />
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content - Hero Section -->
+    <main
+      class="flex-grow container mx-auto p-4 sm:p-8 flex items-center justify-center"
+    >
+      <div
+        class="bg-card p-6 md:p-12 shadow-2xl rounded-3xl w-full max-w-4xl text-center border border-gray-100 transform transition duration-700 hover:shadow-primary/20"
+      >
+        <!-- Badge -->
+        <span
+          class="inline-block bg-secondary/10 text-secondary text-sm font-semibold px-4 py-1 rounded-full mb-4"
+        >
+          AI Powered Age & Fact Finder
+        </span>
+
+        <h1
+          class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-4 leading-tight"
+        >
+          {{title}}
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-500 mb-10 max-w-2xl mx-auto">
+          Masukkan tahun lahir Anda dan temukan usia pasti Anda, sekaligus
+          dapatkan fakta menarik dan relevan yang dihasilkan oleh AI.
+        </p>
+
+        <div
+          class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
+        >
+          <a
+            href="/usia"
+            class="bg-primary hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-xl shadow-primary/40 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-primary/50"
+          >
+            Mulai Hitung Usia & Fakta
+            <span class="ml-2 inline-block">&rarr;</span>
+          </a>
+          <a
+            href="/about"
+            class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-8 rounded-full text-lg transition duration-300 shadow-md"
+          >
+            Pelajari Lebih Lanjut
+          </a>
+        </div>
+
+        <div class="mt-12 text-gray-400 text-sm">
+          Telah dipercaya oleh 0 pengguna untuk menghitung usia mereka. 🤫
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left"
+      >
+        <p class="text-sm text-gray-400">
+          &copy; 2024 AgeFact App. Dibuat dengan cinta.
+        </p>
+        <a
+          href="https://github.com/im-Like-Satay"
+          target="_blank"
+          class="mt-3 md:mt-0 text-secondary hover:text-rose-400 transition duration-150 flex items-center justify-center font-medium"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class="mr-2"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2c0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+            />
+          </svg>
+          im-Like-Satay di GitHub
+        </a>
+      </div>
+    </footer>
   </body>
 </html>

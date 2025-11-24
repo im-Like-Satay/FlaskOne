@@ -3,22 +3,286 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hitung Usia</title>
+    <title>Hitung Usia & Fakta Menarik</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Konfigurasi Tailwind untuk Font Inter dan palet warna elegan -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              primary: "#4F46E5", // Indigo-600
+              secondary: "#F43F5E", // Rose-500
+              background: "#F8FAFC", // Slate-50
+              card: "#FFFFFF", // Putih
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Font Inter dari Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Animasi sederhana untuk hasil */
+      @keyframes pop-in {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .result-item {
+        animation: pop-in 0.5s ease-out forwards;
+      }
+    </style>
   </head>
-  <body>
-    <h1>{{title}}</h1>
-    <form method="post" action="/usia">
-      <label>Masukann Tahun Lahir</label>
-      <input type="number" name="tahun_lahir" />
-      <button type="submit">Submit</button>
-    </form>
-    <p>{{usia}}</p>
-    <p>{{fakta}}</p>
-    <ul>
-      <li>
-        <a href="/">Kembali ke home</a>
-        <a href="/about">Ke about</a>
-      </li>
-    </ul>
+  <body class="font-sans bg-background min-h-screen flex flex-col antialiased">
+    <!-- Navbar -->
+    <nav class="bg-card shadow-lg sticky top-0 z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <a
+            href="/"
+            class="text-2xl font-extrabold text-primary tracking-tight"
+          >
+            AgeFact.
+          </a>
+          <div class="flex items-center space-x-4">
+            <a
+              href="/usia"
+              class="bg-primary/10 text-primary px-3 py-2 rounded-lg text-base font-semibold"
+            >
+              Cek Usia & Fakta
+            </a>
+            <a
+              href="/about"
+              class="text-gray-600 hover:text-primary px-3 py-2 rounded-lg text-base font-medium transition duration-150 hidden sm:block"
+            >
+              Tentang
+            </a>
+            <a
+              href="https://github.com/im-Like-Satay"
+              target="_blank"
+              class="text-gray-500 hover:text-gray-800 transition duration-150 flex items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2c0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto p-4 sm:p-8">
+      <div class="max-w-2xl mx-auto">
+        <h1
+          class="text-3xl font-extrabold text-gray-800 mb-8 text-center border-b pb-4"
+        >
+          {{title}}
+        </h1>
+
+        <!-- Input Form Card -->
+        <div
+          class="bg-card p-6 md:p-8 shadow-2xl rounded-2xl border-t-4 border-primary/50 mb-10"
+        >
+          <p class="text-gray-500 mb-6 text-center text-lg">
+            Masukkan tahun kelahiran Anda untuk melihat usia dan fakta sejarah
+            yang unik.
+          </p>
+          <form method="post" action="/usia" class="space-y-6">
+            <label
+              for="tahun_lahir"
+              class="block text-xl font-semibold text-gray-700"
+            >
+              Tahun Lahir:
+            </label>
+            <input
+              type="number"
+              id="tahun_lahir"
+              name="tahun_lahir"
+              placeholder="Contoh: 1995"
+              required
+              min="1900"
+              max="2024"
+              class="w-full px-5 py-3 border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-primary/30 focus:border-primary transition duration-200 shadow-inner text-2xl text-center"
+            />
+            <button
+              type="submit"
+              class="w-full bg-secondary hover:bg-rose-600 text-white font-bold py-3 rounded-xl text-xl transition duration-300 shadow-xl shadow-secondary/40 transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-secondary/50"
+            >
+              Proses & Dapatkan Fakta 🚀
+            </button>
+          </form>
+        </div>
+
+        <!-- Result Section (Hanya tampil jika usia atau fakta ada) -->
+        {% if usia or fakta %}
+        <div class="space-y-6">
+          <h2 class="text-3xl font-extrabold text-gray-800 text-center">
+            🎉 Hasil Perhitungan 🎉
+          </h2>
+
+          <!-- Usia Result Card -->
+          {% if usia %}
+          <div
+            class="result-item p-6 bg-primary/10 border-l-8 border-primary rounded-xl shadow-lg"
+            style="animation-delay: 0s"
+          >
+            <p
+              class="text-xl font-semibold text-gray-800 mb-2 flex items-center"
+            >
+              <span class="mr-2 text-primary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 1a2 2 0 0 0-2 2v2H5V3a3 3 0 0 1 6 0v2h-1V3a2 2 0 0 0-2-2z"
+                  />
+                  <path
+                    d="M5 5v2.71c.91.828 2.392 1.298 3.551 1.298.243 0 .487-.02.73-.06V5H5z"
+                  />
+                  <path
+                    d="M9.73 9.028c-.143.127-.293.245-.45.352-.06.04-.122.078-.186.115C8.361 9.873 8.18 10 8 10c-.18 0-.36-.127-.594-.255-.064-.037-.126-.075-.186-.115-.157-.107-.307-.225-.45-.352V14h6V9.028zM8 0a.5.5 0 0 1 .5.5v1.5H10V3a.5.5 0 0 1-1 0V2H8V1.5A.5.5 0 0 1 8 0zM4 14V9.028a4.957 4.957 0 0 0 .584.975c.083.1.185.195.305.285.043.033.085.066.127.098.232.185.52.355.827.502.316.152.66.282 1.012.383.504.143 1.053.224 1.6.224s1.096-.081 1.6-.224c.352-.1.696-.231 1.012-.383.307-.147.595-.317.827-.502.042-.032.084-.065.127-.098.12-.09.222-.185.305-.285.158-.19.31-.387.457-.599V14H4zM15 5v2.71a4.996 4.996 0 0 0-.67-1.125c-.206-.233-.443-.46-.704-.666V5H15zM1 5v2.71a4.997 4.997 0 0 0 1.374 1.815c.261.206.498.433.704.666a4.996 4.996 0 0 0 .67 1.125V5H1z"
+                  />
+                </svg>
+              </span>
+              Usia Anda Saat Ini:
+            </p>
+            <p class="text-5xl font-extrabold text-primary mt-2">{{ usia }}</p>
+          </div>
+          {% endif %}
+
+          <!-- Fakta Result Card -->
+          {% if fakta %}
+          <div
+            class="result-item p-6 bg-secondary/10 border-l-8 border-secondary rounded-xl shadow-lg"
+            style="animation-delay: 0.2s"
+          >
+            <p
+              class="text-xl font-semibold text-gray-800 mb-2 flex items-center"
+            >
+              <span class="mr-2 text-secondary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M12.983 1a1 1 0 0 1 1 1v12l-5.176-1.725L8 12.015l-.807.26L1.017 14V2a1 1 0 0 1 1-1h10.966zM13 0H3a2 2 0 0 0-2 2v14l6.5-2.25L15 16V2a2 2 0 0 0-2-2z"
+                  />
+                </svg>
+              </span>
+              Fakta Menarik dari Tahun Lahir:
+            </p>
+            <p
+              class="text-lg text-gray-700 leading-relaxed italic mt-3 border-t pt-3"
+            >
+              "{{ fakta }}"
+            </p>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Navigasi Bawah -->
+        <div class="mt-12 text-center flex flex-wrap justify-center gap-4">
+          <a
+            href="/"
+            class="text-gray-600 hover:text-primary font-medium transition duration-150 py-2 px-4 rounded-full bg-card shadow-md hover:shadow-lg border border-gray-200 flex items-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="mr-2"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7H11a.5.5 0 0 1 .5.5z"
+              />
+            </svg>
+            Kembali ke Beranda
+          </a>
+          <a
+            href="/about"
+            class="text-gray-600 hover:text-primary font-medium transition duration-150 py-2 px-4 rounded-full bg-card shadow-md hover:shadow-lg border border-gray-200 flex items-center"
+          >
+            Tentang Aplikasi
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="ml-2"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+              />
+              <path
+                d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left"
+      >
+        <p class="text-sm text-gray-400">
+          &copy; 2024 AgeFact App. Hak Cipta Dilindungi.
+        </p>
+        <a
+          href="https://github.com/im-Like-Satay"
+          target="_blank"
+          class="mt-3 md:mt-0 text-secondary hover:text-rose-400 transition duration-150 flex items-center justify-center font-medium"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class="mr-2"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2c0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+            />
+          </svg>
+          im-Like-Satay di GitHub
+        </a>
+      </div>
+    </footer>
   </body>
 </html>

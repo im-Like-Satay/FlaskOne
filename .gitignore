@@ -2,6 +2,7 @@
 .env
 .env.*
 !.env.example
+.bakup*
 
 # Python
 __pycache__/
