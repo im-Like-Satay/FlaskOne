@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 .bakup*
+test*
 
 # Python
 __pycache__/
