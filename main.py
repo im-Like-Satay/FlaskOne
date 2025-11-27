@@ -41,7 +41,7 @@ def ai_call(tahun):
         fakta = completion.choices[0].message.content
         return fakta
     except Exception as e:
-        return f"terjadi kesalahan saat memanggil API Deepseek : {e}"
+        return f"terjadi kesalahan saat memanggil API : {e}"
 
 
 @app.route("/")
