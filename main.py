@@ -1,5 +1,6 @@
 # Fix untuk Python 3.14 compatibility
 # for devlopment environment only
+
 # import pkgutil
 # import importlib.util
 # if not hasattr(pkgutil, 'get_loader'):
@@ -10,9 +11,12 @@
 #         except:
 #             return None
 #     pkgutil.get_loader = get_loader
+
+
 # <<< import library yang dibutuhkan >>>
 from flask import Flask, render_template, request
 import os
+import re
 from dotenv import load_dotenv
 from datetime import datetime
 from openai import OpenAI
@@ -63,7 +67,7 @@ def cal_usia():
         tahun_sekarang = datetime.now().year
         usia = f"usia anda saat ini adalah : {tahun_sekarang - tahun_lahir} tahun"
         
-        fakta = ai_call(tahun_lahir)
+        fakta = ' '.join(re.sub(r'\*+.*?\*+', '', ai_call(tahun_lahir)).split())
 
         return render_template("usia.html", title=title, usia=usia, fakta=fakta)
     return render_template("usia.html", title=title)
